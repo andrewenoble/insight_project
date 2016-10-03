@@ -1,89 +1,19 @@
-var svg = d3.select("svg"),
-width = +svg.attr("width"),
-height = +svg.attr("height");
+var width = 643.5;
+var height = 585;       
 
-var dataset;                    
+var container = d3.select("#d3")
 
-d3.csv("../static/data/doc_symplex_coord_plus_topic_fracs.csv", function(data) { //"../static/data/test.txtdoc_symplex_coord.txt", function(datasettxt) {
+var svg = container
+    .append("svg")
+        .style("width", width + "px")
+        .style("height", height + "px");    
 
-dataset = data;
-
-//console.log(dataset);
-
-dataset.forEach(function(d){ 
-    d['x'] = +d['x']; 
-    d['y'] = +d['y'];
-    d['r'] = +d['r'];
-    d['e'] = +d['e'];
-    d['p'] = +d['p']; 
-})
-
-var rgbs = [];
-var text, i;
-
-for (i = 0; i < dataset.length; i++) {
-    rgbs.push("rgb(" + 
-    Math.round(dataset[i].r * 255) + "," + 
-    Math.round(dataset[i].e * 255) + "," + 
-    Math.round(dataset[i].p * 255) + ")");
-}                  
-
-//console.log(rgbs[0]);
-
-var g = svg.append("g");
-
-var xScale = d3.scaleLinear().domain([
-    d3.min(dataset, function(d) { return d.x - 0.05;}), 
-    d3.max(dataset, function(d) { return d.x + 0.05;})])
-    .range([0, width]);
-
-var yScale = d3.scaleLinear().domain([
-    d3.min(dataset, function(d) { return d.y - 0.05;}), 
-    d3.max(dataset, function(d) { return d.y + 0.10;})])
-    .range([height, 0]);      
-
-g.selectAll("circle")
-    .data(dataset)
-    .enter()
-    .append("circle")
-    .attr("cx", function(d) { return xScale(d.x); })
-    .attr("cy", function(d) { return yScale(d.y); })
-    .attr("r", 2)
-    .attr("fill", function(d, i) { return rgbs[i]; })
-    .attr("opacity", 0.6);
-    //.on("mouseover", function() {
-    //  d3.select(this)
-    //    .attr("fill", "orange");
-    //});
-    //.on("click"), function(d) {
-    //  console.log(d);
-    //};
-    //.on("mouseover", mouseover)
-    //.on("mouseout", mouseover)
-    //.append("title").text(function() {return "Hi"; });d
-    
-svg.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .style("fill", "none")
-    .style("pointer-events", "all") // THIS MAKES CATCHING ANY MOUSEOVER EVENTS ABOVE IMPOSSIBLE!!!!!!!!!!!!!
-    .on("click", function(d) {
-    console.log("a");
-    })
-    .call(d3.zoom()
-        .scaleExtent([1 / 2, 8]) // SETS MIN (0.5x orig size) AND MAX (4x orig size) ZOOM 
-        .on("zoom", function() {
-            g.attr("transform", d3.event.transform);
-        })); 
-
-function zoomed() {
-g.attr("transform", d3.event.transform);
-}
+var g = svg.append("g");      
 
 g.append("text")
     .attr("x", -0.73 * width)             
     .attr("y", 0.51 * height)
-    .attr("fill", "rgb(255, 0, 0)")
+    .attr("fill", "rgb(255, 93, 49)")
     .attr("text-anchor", "left")
     .style("font-size", "32px")
     .attr("transform", function(d) {
@@ -94,7 +24,7 @@ g.append("text")
 g.append("text")
     .attr("x", 0.31 * width)             
     .attr("y", -0.445 * height)
-    .attr("fill", "rgb(0,255,0)")
+    .attr("fill", "rgb(155, 33, 232)")
     .attr("text-anchor", "left")
     .style("font-size", "32px")
     .attr("transform", function(d) {
@@ -103,31 +33,83 @@ g.append("text")
     .text("Emotional Support"); 
 
 g.append("text")
-    .attr("x", 0.63 * width)             
+    .attr("x", 0.60 * width)             
     .attr("y", 0.99 * height)
-    .attr("fill", "rgb(0, 0, 255)")
+    .attr("fill", "rgb(49, 190, 255)")
     .attr("text-anchor", "left")
     .style("font-size", "32px")
-    .text("Problem Solving");        
+    .text("Problem Solving");         
 
-/*
-var mouseover = function() {
-d3.select(self)
-    .transition()
-    .duration(500)
-    .attr("r", 5.);
-}
-*/
-/*
-function phyllotaxis(radius) {
-var theta = Math.PI * (3 - Math.sqrt(5));
-return function(i) {
-    var r = radius * Math.sqrt(i), a = theta * i;
-    return [
-    width / 2 + r * Math.cos(a),
-    height / 2 + r * Math.sin(a)
-    ];
-};
-}
-*/
+var dataset;
+d3.csv("../static/data/coords_and_text.csv", function(data) { 
+
+    dataset = data;
+
+    dataset.forEach(function(d){ 
+        d['x'] = +d['x']; 
+        d['y'] = +d['y'];
+        d['r'] = +d['r'];
+        d['e'] = +d['e'];
+        d['p'] = +d['p']; 
+    })
+
+    var rgbs = [];
+    var i;
+
+    for (i = 0; i < dataset.length; i++) {
+        rgbs.push("rgb(" + 
+        Math.round((dataset[i].r * 255 + dataset[i].e * 155 + dataset[i].p * 49 )) + "," + 
+        Math.round((dataset[i].r * 93  + dataset[i].e * 33  + dataset[i].p * 190)) + "," + 
+        Math.round((dataset[i].r * 49  + dataset[i].e * 232 + dataset[i].p * 255)) + ")");
+    }                  
+
+    var xScale = d3.scaleLinear().domain([
+        d3.min(dataset, function(d) { return d.x - 0.05;}), 
+        d3.max(dataset, function(d) { return d.x + 0.05;})])
+        .range([0, width]);
+
+    var yScale = d3.scaleLinear().domain([
+        d3.min(dataset, function(d) { return d.y - 0.05;}), 
+        d3.max(dataset, function(d) { return d.y + 0.10;})])
+        .range([height, 0]);      
+
+    g.selectAll("circle")
+        .data(dataset)
+        .enter()
+        .append("circle")
+            .attr("cx", function(d) { return xScale(d.x); })
+            .attr("cy", function(d) { return yScale(d.y); })
+            .attr("r", 3.3)
+            .attr("fill", function(d, i) { return rgbs[i]; })
+            .attr("class", "data_points")
+            .on("mouseover", tip.show)
+            .on("mouseout", tip.hide);
 });
+
+var zoom = d3.zoom()
+    .scaleExtent([4 / 5, 200]) // SETS MIN (0.5x orig size) AND MAX (8x orig size) ZOOM 
+    .translateExtent([
+        [-0.5 * width, -0.5 * height], 
+        [1.5 * width, 1.5 * height]])
+    .on("zoom", zoomed); 
+
+var tip = d3.tip()
+  	.attr("class", "d3-tip")
+    .offset([-5, 0])
+    .html(function(d) { return d.text; });    
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .style("fill", "none")
+    .call(zoom);
+
+g.call(tip); 
+svg.call(zoom);
+
+function zoomed() {
+    g.transition().duration(200).attr("transform", d3.event.transform);
+    d3.selectAll("circle")
+        .transition().duration(400)
+        .attr("r", 3.3 / d3.event.transform.k);    
+}      
