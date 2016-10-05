@@ -62,4 +62,4 @@ To make changes to the web app, kill the server
 ```
 sudo pkill -f supervisor
 ```
-edit files, and then re-start the server.  Additional work is needed to change the port from 5000 to 80, to setup an elastic IP address, and to associate the web app with a domain name.  Please let me know if you would like me to add those details.
+edit files, and then re-start the server.  Additional work is needed to change the port from 5000 to 80, to setup an elastic IP address, and to associate the web app with a domain name.  Please contact me if you would like me to add those details.
