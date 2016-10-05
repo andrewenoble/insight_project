@@ -9,7 +9,7 @@ This repo contains the Python, HTML, CSS, js, and D3.js to serve up my Insight H
 ## Requirements
 
 * D3.js
-* Python (Flask, RE, NLTK, Gensim, Numpy)
+* Python (Flask, NLTK, RE, Stop_words, Gensim, Numpy)
 
 ## Usage
 
@@ -34,19 +34,20 @@ This can be deployed on a ```t2.micro``` free tier EC2 instance.  Once the insta
 sudo apt-get update
 sudo apt-get install python-pip python-dev build-essential
 sudo pip install flask
-sudo apt-get numpy
+sudo pip install numpy
 sudo pip install nltk
+sudo apt-get install python-scipy
 sudo pip install gensim
 ```
-Then setup a server.
+Install a server and a monitoring tool.
 ```
 sudo pip install gunicorn
 sudo pip install supervisor
 ```
-And create a file simple.conf containing
+And create a file ```simple.conf``` containing
 ```
 [program:myserver]
-command=gunicorn hello:app -w 4 -b 0.0.0.0:80
+command=gunicorn views:app -w 4 -b 0.0.0.0:5000
 
 [supervisord]
 logfile=/home/ubuntu/supervisord.log
@@ -61,4 +62,4 @@ To make changes to the web app, kill the server
 ```
 sudo pkill -f supervisor
 ```
-edit files, and then re-start the server.
+edit files, and then re-start the server.  Additional work is needed to change the port from 5000 to 80, to setup an elastic IP address, and to associate the web app with a domain name.
