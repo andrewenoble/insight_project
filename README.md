@@ -1,36 +1,66 @@
-# Visualize a critical state of sync
+# HealthConnect: Automating connections in online health forums
 
 By [Andrew Noble](http://two.ucdavis.edu/~andrewnoble)
 
 ## About
 
-This repo contains the C++ and Python files used to simulate and animate a dynamical 2D Ising critical state in the collective synchronization of noisy coupled nonlinear two-cycle oscillators.  The end result is the animation at the top of  [this webpage](http://two.ucdavis.edu/~andrewnoble/research.html).
+This repo contains the Python, HTML, CSS, js, and D3.js to serve up my Insight Health Data Science web app, [HealthConnect](http://healthconnect.online), the result of a consulting opportunity with the Cambridge-based data science team at Merck.
 
 ## Requirements
 
-* g++
-* Python (scipy, matplotlib, pylab)
+* D3.js
+* Python (Flask, NLTK, RE, Stop_words, Gensim, Numpy)
 
 ## Usage
 
 Clone the repo.
 ```
-git clone https://github.com/andrewenoble/critical-sync.git
-```
-Run the Monte Carlo simulation written in C++ (using header files from Numerical Recipes 3rd ed).  200 1MB output files will be written to ```critical-sync/simulation_output```.  This may take a few minutes.  The place holder file ```simulation_output/m_0.txt``` will be overwritten.  
-```
-cd critical-sync/simulation
-g++ asymp.cpp -O3 
-./a.out
-```
-Generate the animation.  The existing animation ```critical_sync.mp4``` will be overwritten.
-```
-cd ../animation
-python critical_sync_anim.py
+git clone https://github.com/andrewenoble/insight_project.git
 ```
 
-## Acknowledgements
+### Local version
 
-This work is support by an <a href="http://www.nsf.gov/awardsearch/showAward?AWD_ID=1344187&amp;HistoricalAwards=false">NSF
-INSPIRE award</a> from the National Science Foundation.  
-Details are published in <a href="http://www.nature.com/ncomms/2015/150408/ncomms7664/full/ncomms7664.html">Nature Communications</a>.
+Run the app on the local 5000 port in debugging mode.
+```
+cd local_version
+python run.py
+```
+Open a web browser and navigate to ```127.0.0.1:5000```.
+
+### AWS version
+
+This can be deployed on a ```t2.micro``` free tier EC2 instance.  Once the instance is up and running, ssh to the home directory and setup the Python environment.
+```
+sudo apt-get update
+sudo apt-get install python-pip python-dev build-essential
+sudo pip install flask
+sudo pip install numpy
+sudo pip install nltk
+sudo pip install stop_words
+sudo apt-get install python-scipy
+sudo pip install gensim
+```
+Install a server and a monitoring tool.
+```
+sudo pip install gunicorn
+sudo pip install supervisor
+```
+And create a file ```simple.conf``` containing
+```
+[program:myserver]
+command=gunicorn views:app -w 4 -b 0.0.0.0:5000
+
+[supervisord]
+logfile=/home/ubuntu/supervisord.log
+loglevel=debug
+user=root
+```
+To start the server, type
+```
+sudo supervisord -c simple.conf
+```
+To make changes to the web app, kill the server
+```
+sudo pkill -f supervisor
+```
+edit files, and then re-start the server.  Additional work is needed to change the port from 5000 to 80, to setup an elastic IP address, and to associate the web app with a domain name.  Please contact me if you would like me to add those details.
