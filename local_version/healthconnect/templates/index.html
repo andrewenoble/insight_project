@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!--Meta data-->
+    <meta name="description" content="Automating online information sharing <br> among patients and caregivers.">
+    <meta name="author" content="Andrew Noble">
+
+    <!--Title-->
+    <title>HealthConnect - Automating Online Sharing</title>
+
+    <!-- CSS -->
+    <!-- Bootstrapious.com -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome-animation.min.css">      
+    <!-- Bootstrap core -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <!-- Google fonts - Montserrat for headings, Cardo for copy-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700|Cardo:400,400italic,700">    
+    <!-- Onepage scroll stylesheet-->
+    <link rel="stylesheet" href="../static/css/onepage-scroll.css">   
+    <!-- Theme stylesheet-->
+    <link rel="stylesheet" href="../static/css/style.default.css" id="theme-stylesheet">     
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="../static/css/custom.css">
+
+    <!--D3-->
+    <script type="text/javascript" src="http://d3js.org/d3.v4.min.js"></script>       
+    <script type="text/javascript" src="../static/js/d3-tip.js"></script>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">       
+  </head>
+
+  <!-- Styling of data points and tooltips in D3 visualization.--> 
+  <!-- Credit: Jill Hubley http://bl.ocks.org/jhubley/63cf8b42e236c29241fb -->
+  <style>
+    /* Default data point styling. */
+    .data_points{
+      opacity: 1.;
+    }
+
+    /* Data point styling on "mouseover". */
+    .data_points:hover{
+      fill: #2be821;
+    }
+
+    .d3-tip {                                     
+      font-weight: bold;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      max-width: 360px;
+      max-height: 253px;
+      padding: 10px;
+      background: lightgray;
+      color: black;
+      border: 8px; 
+      border-radius: 8px;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none !important;       
+    }
+
+    /* Style northward tooltips differently. */
+    .d3-tip.n:after {
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+    }
+  </style>
+
+  <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function --> 
+  <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">  
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="/">HealthConnect</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li><a href="/about">about</a></li>
+                    <li><a href="/contact">contact</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- One section per slide. -->
+    <div class="wrapper">
+      <div class="main"> 
+
+        <section id="page1">
+          <div class="overlay img-responsive"></div>
+          <div class="content">
+            <div class="container clearfix">
+              <div class="row">
+                <div class="col-md-9 col-md-offset-4 col-sm-12">                
+                  <h1 class="heading" style="font-size:52px">HealthConnect</h1>
+                  <br><br>
+                  <h2>Automating connections in<br>online health forums</h2>
+                  <br><br>
+                  <h3 style="color:grey">Contact: Arnaub Chatterjee, Director <br> Data Science & Insights, Merck</h3>
+                </div>                                 
+              </div>
+            </div> 
+          </div>
+        </section>
+
+        <section>
+          <div class="content">
+            <div class="container clearfix">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12" align="center">                
+                  <h1 class="heading">Motivation</h1>
+                  <img src="../static/img/motivation.png" alt=""  align="middle" class="img-responsive" width="90%" height="90%"/>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </section> 
+
+        <section>
+          <div class="content">
+            <div class="container clearfix">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12" align="center">                
+                  <h1 class="heading">Problem</h1>
+                  <img src="../static/img/problem.png" alt=""  align="middle" class="img-responsive" width="90%" height="90%"/>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </section>   
+
+        <section>
+          <div class="content">
+            <div class="container clearfix">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12" align="center">                
+                  <h1 class="heading">Solution: First Step</h1>
+                  <img src="../static/img/soln_step_1.png" alt=""  align="middle" class="img-responsive" width="60%" height="60%"/>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </section>                        
+
+        <section>
+          <div class="content">
+            <div class="container clearfix">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12" align="center">                
+                  <h1 class="heading">3-Topic model of Dem. & Alz. forum</h1> 
+                  <h2>1. Emotional Support</h2> 
+                    <h2 class="lead">Happiness, mother, leave, frustrated, sister, safe</h2><!--, gone, reality, took, grandma, face, parent, shell, grandpa, calm, remember, upset-->
+                  <h2>2. Research Discussion</h2> 
+                    <h2 class="lead">Test, drug, cognition, onset, article, clinic</h2><!--, diet, genetic, blood, trial, exercise, amyloid, gene, mutation, stroke, result, disorder-->
+                  <h2>3. Problem Solving</h2>  
+                    <h2 class="lead">Service, attorney, medicare, insurance, legal, cover</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>   
+
+        <section>
+          <div class="content">
+            <div class="container clearfix">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1" align="center">     
+                  <h1 class="heading">3-Topic Model Visualization</h1>   
+                  <div id="d3">   
+                    <script type="text/javascript" src="../static/js/d3simplex_index.js"></script>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section> 
+
+        <section>
+          <div class="content">
+            <div class="container clearfix">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12" align="center">                
+                  <h1 class="heading">Solution</h1>
+                  <img src="../static/img/soln_step_2.png" alt=""  align="middle" class="img-responsive" width="90%" height="90%"/>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </section>   
+
+        <section>
+          <div class="content">
+            <div class="container clearfix">
+              <div class="row">
+                <form action="/output" method="GET">
+                  <div class="form-group col-md-10 col-md-offset-1" align="center">
+                    <h1 class="heading">HealthConnect Product Prototype</h1>
+                    <div align="center"> 
+                      <textarea name="user_text" cols="44" rows="3" 
+                        placeholder="Enter Dementia and Alzheimer's online post."></textarea>
+                      <style>
+                        textarea
+                        {
+                          font-size: 34px;
+                        }
+                      </style>
+                      <br><br>                  
+                      <button type="submit" class="btn btn-lg" color="lightgrey">Classify & Recommend</button>
+                    </div>
+                  </div>
+                </form>                       
+              </div>
+            </div>
+          </div>
+        </section>                  
+
+      </div>
+    </div>
+
+    <!-- Javascript files-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../static/js/jquery-1.11.0.min.js"><\/script>')</script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.cookie.js"></script>
+    <script src="../static/js/jquery.onepage-scroll.js"></script>
+    <script src="../static/js/front.js"></script>
+  </body>
+</html>

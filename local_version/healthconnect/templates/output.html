@@ -31,11 +31,11 @@
     <link rel="stylesheet" href="../static/css/custom.css">
 
     <!--D3-->
-    <script type="text/javascript" src="http://d3js.org/d3.v4.min.js"></script>       
+    <script type="text/javascript" src="http://d3js.org/d3.v4.min.js"></script>      
     <script type="text/javascript" src="../static/js/d3-tip.js"></script>
 
     <!--CSS-->
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">       
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">    
   </head>
 
   <!-- Styling of data points and tooltips in D3 visualization.--> 
@@ -78,6 +78,7 @@
 
   <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function --> 
   <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">  
+  <!-- <body> -->
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -96,8 +97,12 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li><a href="/about">about</a></li>
-                    <li><a href="/contact">contact</a></li>
+                    <li>
+                        <a href="/about">about</a>
+                    </li>
+                    <li>
+                        <a href="/contact">contact</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -107,80 +112,20 @@
 
     <!-- One section per slide. -->
     <div class="wrapper">
-      <div class="main"> 
-
-        <section id="page1">
-          <div class="overlay img-responsive"></div>
-          <div class="content">
-            <div class="container clearfix">
-              <div class="row">
-                <div class="col-md-9 col-md-offset-4 col-sm-12">                
-                  <h1 class="heading" style="font-size:52px">HealthConnect.Online</h1>
-                  <br><br>
-                  <h2>Automating online information sharing <br> among patients and caregivers</h2>
-                  <br><br>
-                  <h3 style="color:grey">Contact: Arnaub Chatterjee, Director <br> Data Science & Insights, Merck</h3>
-                </div>                                 
-              </div>
-            </div> 
-          </div>
-        </section>
+      <div class="main">     
 
         <section>
           <div class="content">
             <div class="container clearfix">
               <div class="row">
-                <div class="col-md-12 col-md-offset-0 col-sm-12" align="center">                
-                  <h1 class="heading" style="font-size:52px">Motivation</h1><!-- For Consulting Project-->
-                  <h2>Strategic targeting of consumer products and services 
-                    <br> through partnerships with</h2>
-                  <h2 style="color:purple">patient advocacy organizations.</h2>
-                </div>
-              </div>
-            </div> 
-          </div>
-        </section>  
-
-        <section>
-          <div class="content">
-            <div class="container clearfix">
-              <div class="row">
-                <div class="col-md-10 col-md-offset-1 col-sm-12" align="center">                
-                  <h1 class="heading">Automated Sharing Solution</h1>
-                  <img src="../static/img/flow_chart.png" alt=""  align="middle" class="img-responsive" width="90%" height="90%"/>
-                </div>
-              </div>
-            </div> 
-          </div>
-        </section>                
-
-        <section>
-          <div class="content">
-            <div class="container clearfix">
-              <div class="row">
-                <div class="col-md-10 col-md-offset-1 col-sm-12" align="center">                
-                  <h1 class="heading">Unstructured Learning: <br><br> 3-Topic model of Dem. & Alz. forum</h1> 
-                  <h2>1. Emotional Support</h2> 
-                    <h2 class="lead">Happiness, mother, leave, frustrated, sister, safe</h2><!--, gone, reality, took, grandma, face, parent, shell, grandpa, calm, remember, upset-->
-                  <h2>2. Research Discussion</h2> 
-                    <h2 class="lead">Test, drug, cognition, onset, article, clinic</h2><!--, diet, genetic, blood, trial, exercise, amyloid, gene, mutation, stroke, result, disorder-->
-                  <h2>3. Problem Solving</h2>  
-                    <h2 class="lead">Service, attorney, medicare, insurance, legal, cover</h2>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>   
-
-        <section>
-          <div class="content">
-            <div class="container clearfix">
-              <div class="row">
-                <div class="col-md-10 col-md-offset-1" align="center">     
-                  <h1 class="heading">D3 Visualization Of 3-Topic Model</h1>   
+                <div class="col-md-10 col-md-offset-1" align="center">      
+                <h1 class="heading">Classification & Recommendation</h1>     
                   <div id="d3">   
-                    <script type="text/javascript" src="../static/js/d3simplex_index.js"></script>
-                  </div>
+                    <script type="text/javascript">
+                      var comment_data_json = {{ comment_data_dict|tojson }};              
+                    </script>  
+                    <script type="text/javascript" src="../static/js/d3simplex_output.js"></script>
+                  </div>                            
                 </div>
               </div>
             </div>
@@ -191,27 +136,17 @@
           <div class="content">
             <div class="container clearfix">
               <div class="row">
-                <form action="/output" method="GET">
-                  <div class="form-group col-md-10 col-md-offset-1" align="center">
-                    <h1 class="heading">Automated Sharing Product Prototype</h1>
-                    <div align="center"> 
-                      <textarea name="user_text" cols="44" rows="3" 
-                        placeholder="Enter Dementia and Alzheimer's online post."></textarea>
-                      <style>
-                        textarea
-                        {
-                          font-size: 34px;
-                        }
-                      </style>
-                      <br><br>                  
-                      <button type="submit" class="btn btn-lg" color="lightgrey">Classify & Recommend</button>
-                    </div>
-                  </div>
-                </form>                       
+                <div class="col-md-9 col-md-offset-1" align="center">
+                  <h1 class="heading" style="font-size:52px">Deliverable For Merck</h1>
+                  <h2>Product prototype to pitch to</h2> 
+                  <h2 style="color:purple">alzconnected.org</h2>
+                  <img src="../static/img/alzconnected.jpg" alt=""  align="middle" class="img-responsive" width="40%" height="40%"/>
+                <!--<h3 class="lead">Demonstrated potential to reduce cost of quantifying consumer demand.</h3>-->
+                </div>
               </div>
             </div>
           </div>
-        </section>                  
+        </section>          
 
       </div>
     </div>
