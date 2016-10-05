@@ -36,6 +36,7 @@ sudo apt-get install python-pip python-dev build-essential
 sudo pip install flask
 sudo pip install numpy
 sudo pip install nltk
+sudo pip install stop_words
 sudo apt-get install python-scipy
 sudo pip install gensim
 ```
