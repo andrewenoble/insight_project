@@ -4,7 +4,7 @@ By [Andrew Noble](http://andrewenoble.com)
 
 ## About
 
-This repo contains the Python, HTML, CSS, js, and D3.js used to 1) perform my data processing and natural language processing, and then 2) serve up my Insight Health Data Science web app, [HealthConnect](http://healthconnect.online), the result of a consulting opportunity with the Cambridge-based data science team at Merck.
+This repo contains the Python, HTML, CSS, js, and D3.js used during Insight Health Data Science fellowship to 1) perform my data processing and natural language processing, and then 2) serve up my web app, [HealthConnect](http://healthconnect.online).  This project grew out of a consulting opportunity with the Cambridge-based data science team at Merck.
 
 ## Requirements
 
