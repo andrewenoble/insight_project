@@ -1,6 +1,6 @@
 # HealthConnect: Automating connections in online health forums
 
-By [Andrew Noble](http://two.ucdavis.edu/~andrewnoble)
+By [Andrew Noble](http://andrewenoble.com)
 
 ## About
 
