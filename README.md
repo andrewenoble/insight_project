@@ -58,6 +58,6 @@ sudo /usr/local/bin/supervisord -c simple.conf
 ```
 To make changes to the web app, kill the server
 ```
-sudo /usr/local/bin/pkill -f supervisor
+sudo /usr/bin/pkill -f supervisor
 ```
 edit files, and then re-start the server.  
