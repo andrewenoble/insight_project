@@ -34,7 +34,7 @@ Open a web browser and navigate to ```127.0.0.1:5000```.
 
 ### Web app: AWS version
 
-This can be deployed on EC2 by launching the Amazon Linux AMI on an ```t2.micro``` instance associated to an Elastic IP address, after configuring the security group to allow inbound HTTP access from source ```0.0.0.0/0```.  Once the instance is up and running and configured, ssh to the home directory and setup the Python environment.
+This can be deployed on EC2 by launching the Amazon Linux AMI on an ```t2.micro``` instance associated to an Elastic IP address, after configuring the security group to allow inbound HTTP access on Port 80 from source ```0.0.0.0/0```.  Once the instance is up and running and configured, ssh to the home directory and setup the Python environment.
 ```
 sudo yum update
 sudo yum install python-pip python-dev build-essential
@@ -58,6 +58,6 @@ sudo /usr/local/bin/supervisord -c simple.conf
 ```
 To make changes to the web app, kill the server
 ```
-sudo /usr/local/bin/supervisord -f supervisor
+sudo /usr/local/bin/pkill -f supervisor
 ```
 edit files, and then re-start the server.  
