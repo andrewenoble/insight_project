@@ -62,9 +62,9 @@ def clean(comment):
 
 
 def proj_into_topic_space(stemmed_stopped_tokenized):
-
-    dictionary = corpora.Dictionary.load('/home/ubuntu/static/gensim_model/reddit.dict')
-    ldamodel = gensim.models.LdaModel.load('/home/ubuntu/static/gensim_model/lda_v1_6.model')
+    
+    dictionary = corpora.Dictionary.load('/home/ec2-user/insight_project/web_app/aws_version/static/gensim_model/reddit.dict')
+    ldamodel = gensim.models.LdaModel.load('/home/ec2-user/insight_project/web_app/aws_version/static/gensim_model/lda_v1_6.model')
 
     bow = dictionary.doc2bow(stemmed_stopped_tokenized)
     comment_topic_vector = ldamodel.get_document_topics(bow)
